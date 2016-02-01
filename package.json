@@ -1,0 +1,16 @@
+{
+  "name": "week12_homework",
+  "version": "1.0.0",
+  "description": "Week 12 Homework",
+  "main": "index.js",
+  "dependencies": {
+    "mysql": "^2.10.2",
+    "prompt": "^0.2.14"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dong Hoon Kim",
+  "license": "ISC"
+}
