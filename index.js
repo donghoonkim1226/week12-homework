@@ -33,8 +33,8 @@ var zoo = {
 		console.log("To add an animal to the zoo please fill out the following form for us!");
 		prompt.get(["name", "type", "age"], function(err, result){
 			var query ="INSERT INTO animals (name, type, age) VALUES (?,?,?)";
-			var userInput = [result.name, result.type, result.age];
-			connection.query(query, animalInfo, function(err, results){
+			var userInput = [results.name, results.type, results.age];
+			connection.query(query, animalInfo, function(err, resultss){
 				if (err){
 					throw err
 				}
@@ -57,23 +57,23 @@ var zoo = {
 	view: function(){
 		var currentScope = input_scope;
 		console.log("Please choose what you would like to visit");
-		prompt.get(["visit"]function(err, result){
-			if (result.visit === "Q"){
+		prompt.get(["visit"]function(err, results){
+			if (results.visit === "Q"){
 				currentScope.menu();
 			} 
-			else if (result.visit === "O"){
+			else if (results.visit === "O"){
 				currentScope.type(input_scope);
 			}
-			else if (result.type === "I"){
+			else if (results.type === "I"){
 				currentScope.type(input_scope);
 			}
-			else if (result.animId === "N"){
+			else if (results.animId === "N"){
 				currentScope.name(input_scope);
 			}
-			else if (result.name === "A"){
+			else if (results.name === "A"){
 				currentScope.all(input_scope);
 			}
-			else if (result.all === "C"){
+			else if (results.all === "C"){
 				currentScope.care(input_scope);
 			}
 			else {
@@ -86,17 +86,19 @@ var zoo = {
 	type: function(input_scope){
 		var = currentScope = input_scope;
 		console.log("Enter animal type to find out how many animals we have of those type");
-		prompt.get(["animal_type"], function(err, result){
+		prompt.get(["animal_type"], function(err, results){
 			var query = "SELECT COUNT (type) FROM animals WHERE type = ?";
-			var userInput = result.animal_type;
+			var userInput = results.animal_type;
+			currentScope.menu();
+			currentScope.promptUser();
 		});
 	},
 	care: function(input_scope){
 		var currentScope = input_scope;
 		console.log("Enter city name NY/SF");
-		prompt.get(["city_name"], function(err, result){
+		prompt.get(["city_name"], function(err, results){
 			var query = "SELECT * FROM caretakers WHERE city = ?";
-			var userInput = result.city_name;
+			var userInput = results.city_name;
 			currentScope.vist();
 			currentScope.view(currentScope);
 		});
@@ -104,11 +106,40 @@ var zoo = {
 	animId: function(input_scope){
 		var currentScope = input_scope;
 		console.log("Enter ID of the animal you want to visit");
-		prompt.get(["animal_id"], function(err, result){
+		prompt.get(["animal_id"], function(err, results){
 			var query = "SELECT * FROM animals WHERE id = ?";
-			var userInput = result.animal_id;
+			var userInput = results.animal_id;
 			currentScope.visit();
 			currentScope.view(currentScope);
+		});
+	},
+	name: function(input_scope){
+		var currentScope = input_scope;
+		console.log("Enter the name of the animal you want to visit");
+		prompt.get(["animal_name"], function(err, results){
+			var query = "SELECT * FROM animals WHERE name = ?";
+			var userInput = results.animal_name;
+			currentScope.visit();
+			currentScope.view(currentScope);
+		});
+	},	
+	all: function(input_scope){
+		var = currentScope = input_scope;
+		console.log("Enter all to see how many animals we have");
+		prompt.get(["animal_all"], function(err, results){
+			var query = "SELECT COUNT (id) FROM animals WHERE id";
+			var userInput = results.animal_all;
+			currentScope.menu();
+			currentScope.promptUser();
+		});	
+	},
+	update: function(input_scope){
+		var currentScope = input_scope;
+		prompt.get(["id", "new", "new_age", "new_type", "new_caretaker_id"]function(err, results){
+			var query = UPDATE animals SET id = ?, new = ?, new_age = ?, new_type = ?, new_caretaker_id = ? WHERE id = ?;
+			var userInput = [results.id, results.new, results.new_age, results.new_type, results.new_caretaker_id];
+			currentScope.menu();
+			currentScope.promptUser();
 		});
 	},
 };
