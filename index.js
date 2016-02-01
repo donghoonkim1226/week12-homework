@@ -33,7 +33,7 @@ var zoo = {
 		console.log("To add an animal to the zoo please fill out the following form for us!");
 		prompt.get(["name", "type", "age"], function(err, result){
 			var query ="INSERT INTO animals (name, type, age) VALUES (?,?,?)";
-			var animalInfo = [result.name, result.type, result.age];
+			var userInput = [result.name, result.type, result.age];
 			connection.query(query, animalInfo, function(err, results){
 				if (err){
 					throw err
@@ -88,10 +88,19 @@ var zoo = {
 		console.log("Enter animal type to find out how many animals we have of those type");
 		prompt.get(["animal_type"], function(err, result){
 			var query = "SELECT COUNT (type) FROM animals WHERE type = ?";
-			var userInputType = result.animal_type;
+			var userInput = result.animal_type;
 		});
 	},
-
+	care: function(input_scope){
+		var currentScope = input_scope;
+		console.log("Enter city name NY/SF");
+		prompt.get(["city_name"], function(err, result){
+			var query = "SELECT * FROM caretakers WHERE city = ?";
+			var userInput = result.city_name;
+			currentScope.vist();
+			currentScope.view(currentScope);
+		});
+	},
 };
 
 
