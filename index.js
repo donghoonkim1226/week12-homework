@@ -45,6 +45,7 @@ var zoo = {
 		});
 	},
 	visit: function(){
+		var currentScope = input_scope;
 		console.log("Enter (I): ------> do you know the animal by it's id? We will visit that animal!\n");
 		console.log("(N): ------> do you know the animal by it's name? We will visit that animal!\n");
 		console.log("(A): ------> here's the count for all animals in all locations!\n");
