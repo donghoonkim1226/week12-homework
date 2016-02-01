@@ -101,6 +101,16 @@ var zoo = {
 			currentScope.view(currentScope);
 		});
 	},
+	animId: function(input_scope){
+		var currentScope = input_scope;
+		console.log("Enter ID of the animal you want to visit");
+		prompt.get(["animal_id"], function(err, result){
+			var query = "SELECT * FROM animals WHERE id = ?";
+			var userInput = result.animal_id;
+			currentScope.visit();
+			currentScope.view(currentScope);
+		});
+	},
 };
 
 
