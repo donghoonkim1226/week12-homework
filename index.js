@@ -32,6 +32,16 @@ var zoo = {
 		var currentScope = input_scope;
 		console.log("To add an animal to the zoo please fill out the following form for us!");
 		prompt.get(["->", "name", "type", "age"], function(err, result){
+			var query ="INSERT INTO animals (name, type, age) VALUES (?,?,?)";
+			var formInfo = [result.name, result.type, result.age];
+			connection.query(query, formInfo, function(err, results){
+				if (err){
+					throw err
+				}
+					console.log("Information has been added")
+					currentScope.menu();
+        	currentScope.promptUser();
+			});
 		});
 	},
 
